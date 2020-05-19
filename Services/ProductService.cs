@@ -45,5 +45,11 @@ namespace GMartWebServices.Services
         {
             throw new System.NotImplementedException();
         }
+
+        public bool addProduct(Product newProduct)
+        {
+           inMemoryProducts.Add(newProduct);
+           return true;
+        }
     }
 }

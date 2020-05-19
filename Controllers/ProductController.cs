@@ -7,6 +7,7 @@ using GMartWebServices.Services;
 using GMartWebServices.DataAccess;
 using GMartWebServices.Models;
 using System.Linq;
+using System.Web;
 
 namespace GMartWebServices.Controllers
 {
@@ -44,6 +45,18 @@ namespace GMartWebServices.Controllers
         public ActionResult<Product> getByCompanyId(int id)
         {
             return productService.getById(id);
+        }
+
+        [HttpPost]
+        public ActionResult addNewProduct(Product model)
+        {
+            Product newProduct=model;
+            //get new id
+            newProduct.id=productService.getAll().OrderByDescending(x=>x.id).FirstOrDefault().id +1;
+
+            productService.addProduct(newProduct);
+            
+            return Ok(newProduct);
         }
     }
 }
