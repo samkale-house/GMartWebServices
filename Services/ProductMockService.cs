@@ -9,14 +9,13 @@ namespace GMartWebServices.Services
     {
         //CRUD
         //Business methods with CRUD operation
-        private GMartDbContext dbContext = new GMartDbContext();
         List<Product> inMemoryProducts;
         public ProductMockService()
         {
             inMemoryProducts = new List<Product>(){
-            new Product(){id=121,Product_Name="abc1",Product_Price=12.21M,Company="Swad",Product_Type=1},
-            new Product(){id=123,Product_Name="abc2",Product_Price=12.21M,Company="Swad",Product_Type=1},
-            new Product(){id=124,Product_Name="abc3",Product_Price=12.21M,Company="Pepsico",Product_Type=1},
+            new Product(){ID=121,Product_Name="abc1",Product_Price=12.21M,Company="Swad",Product_Type=1},
+            new Product(){ID=123,Product_Name="abc2",Product_Price=12.21M,Company="Swad",Product_Type=1},
+            new Product(){ID=124,Product_Name="abc3",Product_Price=12.21M,Company="Pepsico",Product_Type=1},
             };
         }
         public IEnumerable<Product> getAll()
@@ -33,7 +32,7 @@ namespace GMartWebServices.Services
 
         public Product getById(int id)
         {
-            return inMemoryProducts.Where(product => product.id == id).FirstOrDefault();
+            return inMemoryProducts.Where(product => product.ID == id).FirstOrDefault();
         }
 
         public Product getByName()
@@ -46,11 +45,21 @@ namespace GMartWebServices.Services
             throw new System.NotImplementedException();
         }
 
-        public int addNewProduct(Product newProduct)
+        public int addNewProduct(Product model)
         {
+            Product newProduct = model;
+            //get new id
+            newProduct.ID = getNewProductID();
+
             inMemoryProducts.Add(newProduct);
-            System.Console.WriteLine("From servicess add newproductid " + newProduct.id + " and name " + newProduct.Product_Name + "count" + inMemoryProducts.Count);
-            return newProduct.id;
+            System.Console.WriteLine("From servicess add newproductid " + newProduct.ID + " and name " + newProduct.Product_Name + "count" + inMemoryProducts.Count);
+            return newProduct.ID;
         }
+
+        private int getNewProductID()
+        {
+            return getAll().OrderByDescending(x => x.ID).FirstOrDefault().ID + 1;
+        }
+
     }
 }

@@ -31,6 +31,7 @@ namespace GMartWebServices.Controllers
         }
 
         //get all available products
+        //https://localhost:2013/Product
         [HttpGet]
         public IActionResult getAll()
         {
@@ -56,6 +57,7 @@ namespace GMartWebServices.Controllers
         // }
 
 
+        //https://localhost:2013/Product/getbycompany/swad
         [HttpGet("[action]/{companyName}")]
         public IActionResult getByCompany(string companyName)
         {
@@ -67,25 +69,25 @@ namespace GMartWebServices.Controllers
             return Ok(resultList);
         }
 
-
-        [HttpGet("[action]/{id}")]
-        public IActionResult getByCompanyId(int id)
+        //get products by id
+        //https://localhost:2013/Product/id
+        [HttpGet("{id}")]
+        public IActionResult getByProductId(int id)
         {
             return Ok(_productService.getById(id));
         }
 
+        //add 1 new product
+        //https://localhost:2013/Product/ ...provide Product as json in request body
         [HttpPost]
         public IActionResult addNewProduct([FromBody]Product model)
         {
             if(model!=null)
             Console.WriteLine("in addProduct for productname"+model.Product_Name);
-            Product newProduct = model;
-            //get new id
-            newProduct.id = _productService.getAll().OrderByDescending(x => x.id).FirstOrDefault().id + 1;
+            
+            int newProductid=_productService.addNewProduct(model);
 
-            _productService.addNewProduct(newProduct);
-
-            return Ok(newProduct);
+            return Ok(newProductid);
         }
     }
 }
