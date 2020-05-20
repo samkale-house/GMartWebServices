@@ -10,5 +10,7 @@ namespace GMartWebServices.Services
         Product getById(int id);
         IEnumerable<Product> getByType();
         IEnumerable<Product> getByCompany(string company);
+
+        int addNewProduct(Product newProduct);
     }
 }

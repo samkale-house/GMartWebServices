@@ -52,3 +52,12 @@
 /home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/obj/Debug/netcoreapp3.1/GMartWebServices.dll
 /home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/obj/Debug/netcoreapp3.1/GMartWebServices.pdb
 /home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/obj/Debug/netcoreapp3.1/GMartWebServices.genruntimeconfig.cache
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/System.Net.Http.Formatting.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.WebApiCompatShim.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/Microsoft.DotNet.PlatformAbstractions.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/Microsoft.Extensions.DependencyModel.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/bin/Debug/netcoreapp3.1/System.Web.Http.Common.dll
+/home/mrmlabs/Sam_Workspace/SAMLABS/GMartWebServices/obj/Debug/netcoreapp3.1/GMartWebServices.MvcApplicationPartsAssemblyInfo.cs

@@ -21,7 +21,8 @@ namespace GMartWebServices
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<GMartDbContext>();            
+            services.AddDbContext<GMartDbContext>();  
+            services.AddTransient<IProductService,ProductMockService>();          
            // services.AddTransient<IProductService,ProductService>();
         }
 
