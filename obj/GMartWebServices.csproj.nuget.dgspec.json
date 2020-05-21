@@ -36,10 +36,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.AspNetCore.Mvc.WebApiCompatShim": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.4, )"
@@ -48,9 +44,9 @@
               "target": "Package",
               "version": "[3.1.4, )"
             },
-            "System.Web.Http.Common": {
+            "System.Web.Http": {
               "target": "Package",
-              "version": "[*, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [

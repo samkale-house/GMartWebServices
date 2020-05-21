@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using GMartWebServices.DataAccess;
 using GMartWebServices.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace GMartWebServices.Services
 {
@@ -17,6 +18,14 @@ namespace GMartWebServices.Services
         {
             _dbContext.Products.Add(newProduct);
             _dbContext.SaveChanges();
+            System.Console.WriteLine("newproduct id:"+newProduct.ID);
+            return newProduct.ID;
+        }
+
+        public async Task<int> addNewProductAsync(Product newProduct)
+        {
+            await _dbContext.Products.AddAsync(newProduct);
+            await _dbContext.SaveChangesAsync();
             System.Console.WriteLine("newproduct id:"+newProduct.ID);
             return newProduct.ID;
         }
@@ -43,6 +52,13 @@ namespace GMartWebServices.Services
         public IEnumerable<Product> getByType()
         {
             throw new System.NotImplementedException();
+        }
+
+        public int ModifyProduct(Product editModel)
+        {
+            _dbContext.Entry(editModel).State=EntityState.Modified;
+            _dbContext.SaveChanges();
+            return editModel.ID;
         }
     }
 }

@@ -24,6 +24,7 @@ namespace GMartWebServices
             services.AddControllers();
             services.AddDbContext<GMartDbContext>(options =>
           options.UseSqlServer("Data Source=localhost;database=MoviesDB;Uid=SA;Password=SAadmin123;MultipleActiveResultSets=true"));
+          services.AddHttpContextAccessor();
   
             //services.AddTransient<IProductService,ProductMockService>();          
            services.AddTransient<IProductService,ProductSqlService>();          

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GMartWebServices.Models;
 using GMartWebServices.DataAccess;
+using System.Threading.Tasks;
 
 namespace GMartWebServices.Services
 {
@@ -61,5 +62,22 @@ namespace GMartWebServices.Services
             return getAll().OrderByDescending(x => x.ID).FirstOrDefault().ID + 1;
         }
 
+        public int ModifyProduct(Product editModel)
+        {
+            Product entityModel=inMemoryProducts.Where(item=>item.ID==editModel.ID).FirstOrDefault();
+            //map editmodel to entitymodel
+            editModel.Company=entityModel.Company;
+            editModel.Product_Name=entityModel.Product_Name;
+            editModel.Product_Price=entityModel.Product_Price;
+            editModel.Product_Type=entityModel.Product_Type;
+            var index=inMemoryProducts.FindIndex(item=>item.ID==editModel.ID);
+            inMemoryProducts[index]=editModel;
+            return entityModel.ID;
+        }
+
+        public Task<int> addNewProductAsync(Product newProduct)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
