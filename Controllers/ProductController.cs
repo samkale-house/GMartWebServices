@@ -40,8 +40,15 @@ namespace GMartWebServices.Controllers
         [HttpGet]
         public IActionResult getAllProducts()
         {
-            Console.WriteLine("from getAll in Productcontroller");
-            return Ok(_productService.getAll().ToList());
+            try
+            {
+                Console.WriteLine("from getAll in Productcontroller");
+                return Ok(_productService.getAll().ToList());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         ///<summary>gets all Company Products</summary>
@@ -55,8 +62,8 @@ namespace GMartWebServices.Controllers
             // if(companyName.Equals("swad",StringComparison.OrdinalIgnoreCase))
             // throw new ArgumentException($"company {companyName} not allowed",nameof(companyName));
             if (resultList.Count == 0)
-            {                
-                return Content($"No Products from Company {companyName}"); 
+            {
+                return Content($"No Products from Company {companyName}");
             }
             return Ok(resultList);
         }
@@ -67,7 +74,11 @@ namespace GMartWebServices.Controllers
         [HttpGet("{id}")]
         public IActionResult getProductById(int id)
         {
-            return Ok(_productService.getById(id));
+            try
+            {
+                return Ok(_productService.getById(id));
+            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
         }
 
         //add 1 new product
@@ -76,11 +87,11 @@ namespace GMartWebServices.Controllers
         public async Task<IActionResult> addNewProduct([FromBody] Product model)
         {
             if (model != null)
-            {                
+            {
                 return BadRequest("Product name is null");
             }
             try
-            {                
+            {
                 int newProductid = await _productService.addNewProductAsync(model);
                 return CreatedAtAction(nameof(getProductById), new { id = newProductid }, model);
             }
@@ -93,24 +104,28 @@ namespace GMartWebServices.Controllers
 
         //https://localhost:2013/Product/
         [HttpPut("{id}")]
-        public IActionResult updateProduct([FromRoute]int id,[FromBody]Product editModel)
+        public IActionResult updateProduct([FromRoute] int id, [FromBody] Product editModel)
         {
-            editModel.ID=id;
-            if(editModel!=null)
+            try
             {
-             int modifiedEntityId=_productService.ModifyProduct(editModel);
-             return Ok(modifiedEntityId);
+                editModel.ID = id;
+                if (editModel != null)
+                {
+                    int modifiedEntityId = _productService.ModifyProduct(editModel);
+                    return Ok(modifiedEntityId);
+                }
+                else
+                {
+                    return Content("Please provide Product details");
+                }
             }
-            else
-            {
-                return Content("Please provide Product details");
-            }
+            catch (Exception ex) { return BadRequest(ex.Message); }
         }
-    
+
         [HttpDelete("{id}")]
         public void removeProduct(int id)
         {
-         Console.WriteLine("Product removed:samplemsg");
+            Console.WriteLine("Product removed:samplemsg");
         }
     }
 }
