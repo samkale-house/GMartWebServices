@@ -12,6 +12,7 @@ using System.Net;
 using System.Web.Http;//namespace for HttpResponseException
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using GMartWebServices.Helpers;
 
 namespace GMartWebServices.Controllers
 {
@@ -53,8 +54,11 @@ namespace GMartWebServices.Controllers
 
         ///<summary>gets all Company Products</summary>
         /// <param>CompanyName</param>
-        /// Uri:https://localhost:2013/Product/getbycompany/swad
-        [HttpGet("[action]/{companyName}")]
+        /// Uri:https://localhost:2013/product?companyname=swad      
+        
+        [HttpGet]
+        [EndPointResolverForGet("companyName",true)]
+        [EndPointResolverForGet("id",false)]
         public IActionResult getProductsByCompany(string companyName)
         {
             List<Product> resultList = _productService.getByCompany(companyName).ToList();
@@ -70,8 +74,10 @@ namespace GMartWebServices.Controllers
 
         ///<summary>gets product with id</summary>
         /// <param>integer id</param>
-        /// Uri:https://localhost:2013/Product/id
-        [HttpGet("{id}")]
+        /// Uri:https://localhost:2013/product?id=4
+        [HttpGet]
+        [EndPointResolverForGet("id",true)]
+        [EndPointResolverForGet("companyName",false)]
         public IActionResult getProductById(int id)
         {
             try
@@ -88,6 +94,7 @@ namespace GMartWebServices.Controllers
         {
             if (model != null)
             {
+
                 return BadRequest("Product name is null");
             }
             try
